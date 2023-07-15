@@ -2,9 +2,5 @@
 jenkins ci-cd pipeline with docker container deployment
 
 random commit
-another commit
-
-
-
-commit 
+another commit 
 
