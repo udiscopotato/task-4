@@ -11,8 +11,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'dockerhub') {
-                        sh "docker build -t udiscopotato/pythonapi ."
-                        sh "docker push udiscopotato/pythonapi"
+                        sh "docker build -t udiscopotato/pythonapi:${env.BUILD_NUMBER} ."
+                        sh "docker push udiscopotato/pythonapi:${env.BUILD_NUMBER}"
                     }
                 }
             }
@@ -20,9 +20,9 @@ pipeline {
         stage('run') {
             steps {
                 script {
-                    sh "docker pull udiscopotato/pythonapi"
+                    sh "docker pull udiscopotato/pythonapi:${env.BUILD_NUMBER}"
                     sh "docker rm -f api"
-                    sh "docker run -d -p 3000:7000 --name api udiscopotato/pythonapi"
+                    sh "docker run -d -p 3000:7000 --name api udiscopotato/pythonapi:${env.BUILD_NUMBER}"
                 }
             }
         }
